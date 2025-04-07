@@ -1,0 +1,61 @@
+.logo {
+  will-change: filter;
+  transition: all 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 4em #eeac27aa);
+  transform: scale(1.2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+ul {
+  list-style: none;
+}
+.api-label-nav {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+@font-face {
+  font-family: JerseyM54;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/JerseyM54.ttf") format("truetype");
+}
+@font-face {
+  font-family: LemonMilkB;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/LEMONMILK-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: LemonMilkR;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/LEMONMILK-Regular.otf") format("opentype");
+}
+
+.font-test{
+  font-family: LemonMilkR;
+}
+.p-menu-list {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+
+}

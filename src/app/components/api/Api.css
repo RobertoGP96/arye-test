@@ -1,0 +1,16 @@
+.bg-green {
+  background-color: rgb(125, 238, 125) !important;
+  border-color: rgba(15, 110, 15, 0.558);
+}
+.bg-red {
+  background-color: rgba(238, 125, 125, 0.851) !important;
+  border-color: rgba(123, 27, 27, 0.558);
+}
+.bg-yelow {
+  background-color: rgb(244, 232, 97) !important;
+  border-color: rgba(107, 108, 31, 0.558);
+}
+.bg-blue {
+  background-color: rgb(125, 198, 238) !important;
+  border-color: rgba(58, 97, 118, 0.558) !important;
+}

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@import "primereact/resources/themes/arya-orange/theme.css";
+@import "primereact/resources/themes/arya-blue/theme.css";
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -19,7 +19,7 @@
   --text-color: rgb(142, 141, 141);
   
   --text-color-secondary: gray;
-  --primary-color	: rgb(255, 255, 255);
+  --primary-color	: rgb(116, 114, 114);
   --primary-btn-color	: rgb(243, 158, 22);
   --primary-color-text	: rgb(96, 96, 96);
   --inline-spacing	: gray;
@@ -28,17 +28,8 @@
   --mask-bg	: gray;
   --highlight-bg	: gray;
   --highlight-text-color	: rgba(128, 128, 128, 0.641);
-
-  
 }
 
-.navbar-top button {
-  background-color: var(--primary-btn-color);
-  
-}
-.navbar-top button:hover {
-  color: black;
-}
 
 body {
   margin: 0;

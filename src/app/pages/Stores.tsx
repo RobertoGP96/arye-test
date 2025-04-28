@@ -69,9 +69,7 @@ const Stores = () => {
     {
       name: "Nike",
       taxe: 1.0807,
-      accounts: [
-        { username: "Albert" },
-      ],
+      accounts: [{ username: "Albert" }],
       link: "https://www.store.com",
     },
   ];
@@ -92,6 +90,7 @@ const Stores = () => {
 
   const AccountsTemplate = (store: store) => {
     const op = useRef<OverlayPanel>(null);
+
     const showAccounts = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -116,7 +115,7 @@ const Stores = () => {
                 key={index}
                 className="w-full flex flex-row justify-start items-center gap-2 rounded-sm bg-gradient-to-r from-gray-300/55 to-gray-300 py-1 px-2"
               >
-                <span className="text-gray-600">{index+1}</span>
+                <span className="text-gray-600">{index + 1}</span>
                 <Avatar shape="circle" icon="pi pi-user" size="normal" />{" "}
                 <span>{account.username}</span>
               </li>
@@ -143,18 +142,17 @@ const Stores = () => {
   };
   const [checked, setChecked] = useState<boolean>(false);
 
-  const handleNewStore = (newStore: store) =>{
+  const handleNewStore = (newStore: store) => {};
 
-  }
-
+  const newStoreOp = useRef<OverlayPanel>(null);
   const Header = () => {
     return (
       <div className="flex justify-between items-center w-full gap-2">
         <h2 className="font-bold text-2xl">Tiendas</h2>
         <div className="flex flex-row gap-2.5">
-          <Button icon="pi pi-plus" label="Añadir" />
-          <OverlayPanel>
-            <StoreForm handleNewStore={handleNewStore}/>
+          <Button icon="pi pi-plus" label="Añadir" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>newStoreOp.current?.toggle(event)} />
+          <OverlayPanel ref={newStoreOp} showCloseIcon>
+            <StoreForm handleNewStore={handleNewStore} />
           </OverlayPanel>
           <ToggleButton
             checked={checked}

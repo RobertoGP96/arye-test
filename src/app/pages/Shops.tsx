@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonChangeEvent } from "primereact/togglebutton";
 import { Button } from "primereact/button";
 import StoreLogo from "../components/StoreLogo";
+import { useNavigate } from "react-router";
 
 const Shops = () => {
   const itemList: shop[] = [
@@ -26,6 +27,7 @@ const Shops = () => {
     },
   ];
 
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
   const [items, setItems] = useState<shop[]>(itemList);
@@ -123,7 +125,7 @@ const Shops = () => {
       <div className="flex justify-between items-center w-full gap-2">
         <h2 className="font-bold text-2xl">Compras</h2>
         <div className="flex flex-row gap-2.5">
-          <Button icon="pi pi-plus" label="Crear" />
+          <Button icon="pi pi-plus" label="Crear" onClick={()=>navigate("/shops/new")}/>
           <ToggleButton
             checked={checked}
             onLabel="Cancelar"

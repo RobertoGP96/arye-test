@@ -1,12 +1,10 @@
 type ProductFilters = {
-  order?: "asc" | "desc"; // Ordenar por precio o nombre
-  client?: string; // Filtro por cliente
-  store?: string; // Filtro por tienda
+  client?: user; // Filtro por cliente
+  store?: store; // Filtro por tienda
   category?: string; // Filtro por categoría
-  priceRange?: { min?: number; max?: number }; // Rango de precios
+  priceRange: [number , number]; // Rango de precios
   dateRange?: { start?: string; end?: string }; // Rango de fechas
   state?: string; // Filtro por estado del producto
-  search?: string; // Búsqueda por nombre o descripción
 };
 
 type OrderFilters = {

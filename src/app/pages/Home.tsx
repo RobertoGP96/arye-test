@@ -2,7 +2,7 @@ const Home = () => {
   return (
     <div className="w-full grow flex justify-center items-center flex-col gap-3">
       <div className="flex flex-row gap-2 justify-center items-center flex-nowrap w-1/3">
-        <a href="https://vite.dev" className="w-full logo" target="_blank">
+        <a href="" className="w-full logo" target="_blank">
           <img src="/f-logo.svg" className=" w-full" alt="AR&E logo" />
         </a>
       </div>

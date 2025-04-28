@@ -31,7 +31,7 @@ const Delivery = () => {
       clientId: "client 1",
     },
     {
-      id: 1,
+      id: 2, // Cambiado de 1 a 2 para evitar duplicados
       products: [
         {
           name: "p1",

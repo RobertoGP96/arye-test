@@ -32,10 +32,10 @@ const ProductForm = ({
     price_store: 0,
   });
 
-  const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
-    e.preventDefault()
-    handleNewProduct(info)
-  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleNewProduct(info);
+  };
   const storeOtions: store[] = [
     { name: "amazon", taxe: 1.0807 },
     { name: "ebay", taxe: 1.1235 },
@@ -75,9 +75,9 @@ const ProductForm = ({
     });
   };
 
-  const handlDescriptionTool=(value: string)=>{
-    setInfo({...info, description: value})
-  }
+  const handlDescriptionTool = (value: string) => {
+    setInfo({ ...info, description: value });
+  };
 
   useEffect(() => {
     if (info.store) {
@@ -121,24 +121,24 @@ const ProductForm = ({
             <label htmlFor="username">Link:</label>
           </FloatLabel>
           <div className="w-full p-2 rounded-sm bg-gray-200">
-
-          <FloatLabel className="w-full">
-            <InputTextarea
-              className="w-full"
-              id="description"
-              value={info.description}
-              onChange={(e) =>
-                setInfo({ ...info, description: e.target.value })
-              }
-              rows={5}
-              cols={30}
-            />
-            <label htmlFor="description">Descripción:</label>
-          <DescriptionTools description={info.description as string} handleAddTool={handlDescriptionTool}/>
-          </FloatLabel>
-
-              </div>
-          
+            <FloatLabel className="w-full">
+              <InputTextarea
+                className="w-full"
+                id="description"
+                value={info.description}
+                onChange={(e) =>
+                  setInfo({ ...info, description: e.target.value })
+                }
+                rows={5}
+                cols={30}
+              />
+              <label htmlFor="description">Descripción:</label>
+              <DescriptionTools
+                description={info.description as string}
+                handleAddTool={handlDescriptionTool}
+              />
+            </FloatLabel>
+          </div>
 
           <FloatLabel className="w-full">
             <InputNumber

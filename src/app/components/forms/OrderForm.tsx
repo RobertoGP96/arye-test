@@ -261,7 +261,7 @@ const OrderForm: React.FC = () => {
             <span className="font-medium text-sm">
               Monto Total:{" "}
               <strong className="font-test min-w-[50px]">
-                {"$ " + order?.totalCost?.toFixed(2)}
+                {"$ "+((order.products.length==0|| order.products)?"0.00":(order?.totalCost?.toFixed(2)))}
               </strong>
             </span>
           </div>

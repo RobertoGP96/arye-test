@@ -59,3 +59,8 @@ ul {
   padding-right: 0.5rem;
 
 }
+
+.active-menu-item {
+  font-weight: bold;
+  background-color: #d1d5db; 
+}

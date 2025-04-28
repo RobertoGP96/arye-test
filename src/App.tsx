@@ -1,11 +1,11 @@
 import "./App.css";
 import "primeicons/primeicons.css";
-import 'boxicons/css/boxicons.min.css';
+import "boxicons/css/boxicons.min.css";
 
 import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";
 import { Button } from "primereact/button";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes, useNavigate, useLocation } from "react-router";
 import Home from "./app/pages/Home";
 import Api from "./app/pages/Api";
 import Orders from "./app/pages/Orders";
@@ -18,10 +18,11 @@ import Delivery from "./app/pages/Delivery";
 import Tools from "./app/pages/Tools";
 import OrderForm from "./app/components/forms/OrderForm";
 import Stores from "./app/pages/Stores";
+import ShopForm from "./app/components/forms/ShopForm";
 
 function App() {
   const pageNav = useNavigate();
-
+  const location = useLocation(); // Hook para obtener la ruta actual
 
   const items: MenuItem[] = [
     {
@@ -30,6 +31,7 @@ function App() {
       command: () => {
         pageNav("/");
       },
+      className: location.pathname === "/" ? "active-menu-item" : "",
     },
     {
       label: "Pedidos",
@@ -37,14 +39,15 @@ function App() {
       command: () => {
         pageNav("/orders");
       },
+      className: location.pathname === "/orders" ? "active-menu-item" : "",
     },
     {
       label: "Productos",
       icon: "pi pi-warehouse",
       command: () => {
         pageNav("/products");
-
       },
+      className: location.pathname === "/products" ? "active-menu-item" : "",
     },
     {
       label: "Compras",
@@ -52,6 +55,7 @@ function App() {
       command: () => {
         pageNav("/shops");
       },
+      className: location.pathname === "/shops" ? "active-menu-item" : "",
     },
     {
       label: "Paquetes",
@@ -59,6 +63,7 @@ function App() {
       command: () => {
         pageNav("/packages");
       },
+      className: location.pathname === "/packages" ? "active-menu-item" : "",
     },
     {
       label: "Entrega",
@@ -66,6 +71,7 @@ function App() {
       command: () => {
         pageNav("/delivery");
       },
+      className: location.pathname === "/delivery" ? "active-menu-item" : "",
     },
     {
       label: "Estadísticas",
@@ -73,6 +79,7 @@ function App() {
       command: () => {
         pageNav("/data");
       },
+      className: location.pathname === "/data" ? "active-menu-item" : "",
     },
     {
       label: "Tiendas",
@@ -80,6 +87,7 @@ function App() {
       command: () => {
         pageNav("/stores");
       },
+      className: location.pathname === "/stores" ? "active-menu-item" : "",
     },
     {
       label: "Utiles",
@@ -87,6 +95,7 @@ function App() {
       command: () => {
         pageNav("/tools");
       },
+      className: location.pathname === "/tools" ? "active-menu-item" : "",
     },
     {
       label: "Usuarios",
@@ -94,6 +103,7 @@ function App() {
       command: () => {
         pageNav("/users");
       },
+      className: location.pathname === "/users" ? "active-menu-item" : "",
     },
   ];
 
@@ -116,10 +126,10 @@ function App() {
         </div>
       </nav>
       <section className="flex flex-row flex-nowrap gap-2 grow">
-        <aside className="aside-nav bg-orange-400 p-1.5 rounded-sm">
+        <aside className="aside-nav bg-gray-400 p-1.5 rounded-sm">
           <Menu model={items} />
         </aside>
-        <div className="section-content w-full flex flex-col max-w-[85%] justify-star items-star border-t-2 border-orange-200 border-b-2 gap-10">
+        <div className="section-content w-full flex flex-col max-w-[85%] justify-star items-star border-t-2 border-gray-200 border-b-2 gap-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/api" element={<Api />} />
@@ -127,8 +137,10 @@ function App() {
 
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/new" element={<OrderForm />} />
-            
+
             <Route path="/shops" element={<Shops />} />
+            <Route path="/shops/new" element={<ShopForm />} />
+
             <Route path="/users" element={<Users />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/data" element={<Stadist />} />
@@ -136,8 +148,8 @@ function App() {
             <Route path="/tools" element={<Tools />} />
             <Route path="/stores" element={<Stores />} />
 
-            <Route path="/login" element={<Orders />} />
-            <Route path="/register" element={<Orders />} />
+            <Route path="/login" element={<Home />} />
+            <Route path="/register" element={<Home />} />
           </Routes>
         </div>
       </section>

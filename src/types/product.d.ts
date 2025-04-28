@@ -20,17 +20,17 @@ type product = {
 
   state?: string;
 
-  price_store: number;
-  descount_store: number;
-  delivery_cost: number;
+  price_store?: number;
+  descount_store?: number;
+  delivery_cost?: number;
 
-  store_taxe: number;
+  store_taxe?: number;
 
-  buy_cost: number;
+  buy_cost?: number;
 
-  taxe_own: number;
-  taxe_add: number;
-  own_offert: number;
+  taxe_own?: number;
+  taxe_add?: number;
+  own_offert?: number;
 
   price: number;
   picture?: string;

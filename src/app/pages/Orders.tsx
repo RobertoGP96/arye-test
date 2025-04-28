@@ -3,11 +3,15 @@ import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { InputIcon } from "primereact/inputicon";
 import { IconField } from "primereact/iconfield";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Avatar } from "primereact/avatar";
 import { ToggleButton, ToggleButtonChangeEvent } from "primereact/togglebutton";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router";
+import { OverlayPanel } from "primereact/overlaypanel";
+import ProductList from "../components/ProductList";
+import { OrderRecipe } from "../components/views/Order";
+import { Dialog } from "primereact/dialog";
 
 const Orders = () => {
   const itemList: order[] = [
@@ -15,15 +19,60 @@ const Orders = () => {
       id: "1",
       products: [
         {
-          name: "",
-          price: 0,
+          name: "Product 1",
+          price: 11.22,
           store: { name: "ebay", taxe: 1.1235 },
+          cuantity: 1,
+          store_taxe: 0,
+          buy_cost: 0,
+          delivery_cost: 0,
+          descount_store: 0,
+          description: " *** \n Color: Azul \n Talla: M \n",
+          own_offert: 0,
+          taxe_own: 0,
+          taxe_add: 0,
+          price_store: 0,
+        },
+        {
+          name: "Product 2",
+          price: 11.22,
+          store: { name: "Amazon", taxe: 1.1235 },
           cuantity: 0,
           store_taxe: 0,
           buy_cost: 0,
           delivery_cost: 0,
           descount_store: 0,
           description: "",
+          own_offert: 0,
+          taxe_own: 0,
+          taxe_add: 0,
+          price_store: 0,
+        },
+        {
+          name: "Product 3",
+          price: 13.22,
+          store: { name: "Aliexpress", taxe: 1.1235 },
+          cuantity: 1,
+          store_taxe: 0,
+          buy_cost: 0,
+          delivery_cost: 0,
+          descount_store: 0,
+          description: " *** \n Color: Azul \n Talla: M \n",
+          own_offert: 0,
+          taxe_own: 0,
+          taxe_add: 0,
+          price_store: 0,
+        },
+        {
+          name: "Product 4",
+          price: 14.22,
+          store: { name: "Temu", taxe: 1.1235 },
+          cuantity: 0,
+          store_taxe: 0,
+          buy_cost: 0,
+          delivery_cost: 0,
+          descount_store: 0,
+          description: " *** \n Modelo: Azul \n Capacity: M \n",
           own_offert: 0,
           taxe_own: 0,
           taxe_add: 0,
@@ -136,12 +185,23 @@ const Orders = () => {
   };
   const [checked, setChecked] = useState<boolean>(false);
 
-  const orderProductsTemplate = (order: order) => {
+  const OrderProductsTemplate = (order: order) => {
+    const productListOP = useRef<OverlayPanel>(null);
     return (
       <div className="flex flex-row justify-star items-center gap-3">
-        <button className="bg-gray-200 rounded-sm p-2 flex justify-center items-center cursor-pointer hover:bg-gray-300">
+        <button
+          className="bg-gray-200 rounded-sm p-2 flex justify-center items-center cursor-pointer hover:bg-gray-300"
+          onClick={(e) => productListOP.current?.toggle(e)}
+        >
           <i className="pi pi-clipboard"></i>
         </button>
+        <OverlayPanel
+          showCloseIcon
+          ref={productListOP}
+          className="w-1/3 max-h-[350px]"
+        >
+          <ProductList productList={order.products} />
+        </OverlayPanel>
         <div className="flex flex-row justify-center items-center gap-1 text-gray-500">
           <i className="pi pi-box"></i>
           <span>{order.products.length}</span>
@@ -182,15 +242,69 @@ const Orders = () => {
     );
   };
 
-  const costBodyTemplate = (order: order) => {
+  const CostBodyTemplate = (order: order) => {
+    const [visible, setVisible] = useState<boolean>(false);
+
+    const headerElement = (
+      <div className="flex flex-row items-center justify-start gap-2">
+        <i className="pi pi-receipt"></i>
+        <span className="font-bold white-space-nowrap">FACTURA</span>
+      </div>
+    );
+
+    const footerContent = (
+      <div className="flex flex-row flex-wrap justify-between items-center w-full border-dotted border-t-2 border-gray-200 pt-2">
+        <h3 className=" w-full text-lg font-semibold text-gray-800">
+          Costo Total: ${order.totalCost?.toFixed(2)}
+        </h3>
+        <div className="flex flex-row gap-2">
+          <Button
+            label="Cerrar"
+            icon="pi pi-times"
+            onClick={() => {
+              if (!visible) return;
+              setVisible(false);
+            }}
+            className="p-button-text"
+            outlined
+            severity="danger"
+          />
+          <Button
+            label="Imprimir"
+            icon="pi pi-print"
+            onClick={() => {
+              if (!visible) return;
+              setVisible(false);
+            }}
+            className="p-button-text"
+            outlined
+            severity="success"
+          />
+        </div>
+      </div>
+    );
+
     return (
       <div className="flex flex-row gap-2 justify-star items-center">
         <button
           type="button"
           className="cursor-pointer rounded-xs p-2 bg-gray-200 border-[2] flex flex-row items-center justify-center gap-1 hover:bg-gray-300"
+          onClick={() => setVisible(true)}
         >
           <i className="pi pi-receipt"></i>
         </button>
+        <Dialog
+          visible={visible}
+          style={{ width: "30vw", height: "60vh" }}
+          onHide={() => {
+            if (!visible) return;
+            setVisible(false);
+          }}
+          header={headerElement}
+          footer={footerContent}
+        >
+          <OrderRecipe order={order} />
+        </Dialog>
         <i className="pi pi-dollar"></i>
         <span className="font-test">{order.totalCost?.toFixed(2)}</span>
       </div>
@@ -247,11 +361,11 @@ const Orders = () => {
         <Column
           field="products"
           header="Productos"
-          body={orderProductsTemplate}
+          body={OrderProductsTemplate}
           sortable
         />
 
-        <Column header="Costo" body={costBodyTemplate} sortable />
+        <Column header="Costo" body={CostBodyTemplate} sortable />
 
         <Column
           field="state"

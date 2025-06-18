@@ -10,7 +10,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useEffect, useState } from "react";
 import StoreLogo from "../StoreLogo";
 import Test from "../utils/Test";
-import DescriptionTools from "../utils/DescriptionTools";
+import DescriptionTools from "../utils/product/DescriptionTools";
 
 const ProductForm = ({
   handleNewProduct,

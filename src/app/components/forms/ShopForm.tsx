@@ -11,7 +11,6 @@ import { FloatLabel } from "primereact/floatlabel";
 
 import { shopStates } from "../../utils/options/shop";
 import { ProductListView } from "../views/Product";
-import ProductPicker from "../utils/ProductPicker";
 
 const ShopForm = () => {
   const stores: store[] = [
@@ -193,8 +192,8 @@ const ShopForm = () => {
         />
       </form>
       <section className="grow min-h-full pt-3">
-        <ProductPicker
-          productsSlected={shopData.productShopeds}
+        <ProductListView
+          productList={shopData.productShopeds}
           headerLabel="Productos Añadidos"
         />
       </section>

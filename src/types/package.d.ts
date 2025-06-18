@@ -1,9 +1,9 @@
 
-type package ={
-    id: string,
+type Package ={
+    id?: string,
     agencyId: number,
     rasterId: string,
-    products: string,
+    products: product[],
     state: string,
     pictures: string[]
 } 

@@ -19,6 +19,7 @@ import Tools from "./app/pages/Tools";
 import OrderForm from "./app/components/forms/OrderForm";
 import Stores from "./app/pages/Stores";
 import ShopForm from "./app/components/forms/ShopForm";
+import PackageForm from "./app/components/forms/PackageForm";
 
 function App() {
   const pageNav = useNavigate();
@@ -142,7 +143,10 @@ function App() {
             <Route path="/shops/new" element={<ShopForm />} />
 
             <Route path="/users" element={<Users />} />
+
             <Route path="/packages" element={<Packages />} />
+            <Route path="/packages/new" element={<PackageForm />} />
+            
             <Route path="/data" element={<Stadist />} />
             <Route path="/delivery" element={<Delivery />} />
             <Route path="/tools" element={<Tools />} />

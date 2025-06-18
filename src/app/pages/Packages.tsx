@@ -6,6 +6,7 @@ import { IconField } from "primereact/iconfield";
 import { useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonChangeEvent } from "primereact/togglebutton";
 import { Button } from "primereact/button";
+import { useNavigate } from "react-router";
 
 const Packages = () => {
   const itemList: packageT[] = [
@@ -20,6 +21,7 @@ const Packages = () => {
   ];
 
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const [items, setItems] = useState<packageT[]>(itemList);
 
@@ -108,13 +110,14 @@ const Packages = () => {
     );
   };
   const [checked, setChecked] = useState<boolean>(false);
-
+  
+  
   const Header = () => {
     return (
       <div className="flex justify-between items-center w-full gap-2">
         <h2 className="font-bold text-2xl">Paquetes</h2>
         <div className="flex flex-row gap-2.5">
-          <Button icon="pi pi-plus" label="Crear" />
+          <Button icon="pi pi-plus" label="Crear" onClick={()=>navigate("/packages/new")}/>
           <ToggleButton
             checked={checked}
             onLabel="Cancelar"

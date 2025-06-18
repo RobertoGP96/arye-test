@@ -1,6 +1,6 @@
 type product = {
   order?: string;
-  client?: string;
+  client?: user;
   store?: store;
   
   category?: string;

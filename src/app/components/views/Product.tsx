@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { Button } from "primereact/button";
-import ProductFilter from "../utils/ProductFilter";
+import ProductFilter from "../utils/product/ProductFilter";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
+import ProductRowViewEdit from "../utils/product/ProductRowViewEdit";
+import { Dialog } from "primereact/dialog";
+import ProductPicker from "../utils/product/ProductPicker";
 
 export const ProductRowView = ({ product }: { product: product }) => {
   type tag = {
@@ -82,9 +85,9 @@ export const ProductRowView = ({ product }: { product: product }) => {
 
 export const ProductListView = ({
   productList,
-  headerLabel
+  headerLabel,
 }: {
-  headerLabel: string,
+  headerLabel: string;
   productList: product[];
 }) => {
   const [listView, setListView] = useState<product[]>(productList);
@@ -98,7 +101,7 @@ export const ProductListView = ({
 
   const onSortChange = (e: { value: string }) => {
     setSortKey(e.value);
-    const sortedProducts = sortProducts(productList, e.value);
+    const sortedProducts = sortProducts(listView, e.value);
     setListView(sortedProducts);
   };
 
@@ -119,6 +122,25 @@ export const ProductListView = ({
     setListView(filteredProducts);
   };
 
+  const handleSelect = (e: product[]) => {
+    const temp = listView;
+    e.map((e: product) => {
+      const checked = temp.find((product) => product.id === e.id);
+      if (!checked) {
+        temp.push(e);
+      }
+    });
+    setListView(temp);
+    setAddPanel(false);
+  };
+
+  const handleDelete = (e: product) => {
+    if (e.id) {
+      const temp = listView.filter((o: product) => o.id != e.id);
+      setListView(temp);
+    }
+  };
+
   useEffect(() => {
     if (!sortKey) setListView(productList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,6 +148,7 @@ export const ProductListView = ({
 
   const op = useRef<OverlayPanel>(null);
 
+  const [addPanel, setAddPanel] = useState<boolean>(false);
   return (
     <div className="w-full flex flex-col gap-2 min-h-full">
       <h2 className="text-md font-bold uppercase">{headerLabel} </h2>
@@ -138,8 +161,32 @@ export const ProductListView = ({
           onChange={onSortChange}
           className="min-h-full w-[160px]"
           showClear
+          disabled={listView.length==0?true:false}
         />
         <div className="flex flex-row gap-2 justify-start items-center ">
+          <div className="flex flex-row gap-2 justify-between items-center p-2 border-3 border-gray-400 border-dotted rounded-full w-15">
+            <i className="pi pi-box"></i>
+            <span className="m-0">{listView.length}</span>
+          </div>
+          <Button
+            icon="pi pi-plus"
+            severity="secondary"
+            label="Añadir"
+            onClick={() => setAddPanel(true)}
+          />
+          <Dialog
+            visible={addPanel}
+            style={{ width: "70vw", height: "85vh" }}
+            onHide={() => {
+              if (!addPanel) return;
+              setAddPanel(false);
+            }}
+          >
+            <ProductPicker
+              headerLabel="Añade productos a la compra"
+              handleAdd={handleSelect}
+            />
+          </Dialog>
           <Button
             icon="bx bx-filter-alt"
             onClick={(e) => op.current?.toggle(e)}
@@ -151,7 +198,7 @@ export const ProductListView = ({
             dismissable={false}
             className="w-[300px]"
           >
-            <ProductFilter productList={productList} />
+            <ProductFilter productList={listView} />
           </OverlayPanel>
           <IconField iconPosition="left">
             <InputIcon className="pi pi-search"> </InputIcon>
@@ -160,21 +207,26 @@ export const ProductListView = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleSearch(e)
               }
+              disabled={listView.length==0?true:false}
             />
           </IconField>
         </div>
       </div>
-      <div className={`flex flex-col  gap-2 ${(productList.length==0 || !productList)? "justify-center":"justify-start"} items-center p-3 border-2 border-gray-200 rounded-sm grow`}>
-        { (listView && listView.length>0)?
-        listView.map((e) => (
-          <ProductRowView product={e} />
-        )):
-        <div className="flex justify-center items-center flex-row gap-2 bg-gray-100 rounded-full py-2 px-3 shadow-sm">
-          <i className="pi pi-exclamation-circle"></i>
-          <span>No hay productos que mostrar.</span>
-        </div>
-      }
-        
+      <div
+        className={`flex flex-col  gap-2 ${
+          listView.length == 0 ? "justify-center" : "justify-start"
+        } items-center p-3 border-2 border-gray-200 rounded-sm grow`}
+      >
+        {listView && listView.length > 0 ? (
+          listView.map((e) => (
+            <ProductRowViewEdit key={e.id} item={e} onDeleted={handleDelete} />
+          ))
+        ) : (
+          <div className="flex justify-center items-center flex-row gap-2 bg-gray-100 rounded-full py-2 px-3 shadow-sm">
+            <i className="pi pi-exclamation-circle"></i>
+            <span>No hay productos que mostrar.</span>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,12 +1,10 @@
 type delivery = {
-  id: number;
+  id?: number;
   products: product[];
-  weith: number;
+  weigth: number;
   cost: number;
   deliveryState: string;
   payState: string;
   picture: string;
-
   clientId: string
-
 };

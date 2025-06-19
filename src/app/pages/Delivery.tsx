@@ -7,8 +7,11 @@ import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import { ToggleButton, ToggleButtonChangeEvent } from "primereact/togglebutton";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const Delivery = () => {
+
+  const navigate = useNavigate()
   const itemList: delivery[] = [
     {
       id: 1,
@@ -159,7 +162,7 @@ const Delivery = () => {
       <div className="flex justify-between items-center w-full gap-2">
         <h2 className="font-bold text-2xl">Entrega</h2>
         <div className="flex flex-row gap-2.5">
-          <Button icon="pi pi-plus" label="Crear" />
+          <Button icon="pi pi-plus" label="Crear" onClick={() => navigate("/delivery/new")} />
           <ToggleButton
             checked={checked}
             onLabel="Cancelar"
@@ -186,7 +189,7 @@ const Delivery = () => {
     return (
       <div className="flex flex-row gap-2 justify-star items-center">
         <i className="pi pi-dollar"></i>
-        <span className="font-test">{item.cost.toFixed(2)+" USD"}</span>
+        <span className="font-test">{item.cost.toFixed(2) + " USD"}</span>
       </div>
     );
   };
@@ -195,7 +198,7 @@ const Delivery = () => {
     return (
       <div className="flex flex-row gap-2 justify-star items-center">
         <button className="flex flex-row justify-center items-center p-2 bg-gray-200 hover:bg-gray-300 rounded-sm cursor-pointer">
-        <i className="pi pi-image"></i>
+          <i className="pi pi-image"></i>
         </button>
         <span className="font-test">{item.weith.toFixed(2)}</span>
         <span className="text-gray-500">lb</span>

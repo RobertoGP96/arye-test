@@ -1,8 +1,3 @@
-export type optionType = {
-    label: string;
-    value: string;
-}
-
 export const productStates: optionType[] = [
     { label: "Procesado", value: "processed" },
     { label: "Pagado", value: "paid" },

@@ -1,8 +1,9 @@
 import { Accordion, AccordionTab } from "primereact/accordion";
 
-const ProductHeader = ({ name, price }: { name: string; price: number }) => (
+const ProductHeader = ({ name, price, cuantity }: { name: string; price: number, cuantity: number }) => (
   <div className="flex justify-between items-center">
     <span className="font-medium text-gray-700">{name}</span>
+    <span className="font-medium text-gray-600 bg-gray-300 p-2 rounded-full text-center">{cuantity}</span>
     <span className="font-test">${price.toFixed(2)}</span>
   </div>
 );
@@ -14,7 +15,7 @@ export const OrderRecipe = ({ order }: { order: order }) => {
         {order.products.map((product, index) => (
           <AccordionTab
             key={index}
-            header={<ProductHeader name={product.name} price={product.price} />}
+            header={<ProductHeader name={product.name} cuantity={product.cuantity} price={product.price} />}
           >
             <div className="flex flex-col text-sm text-gray-500 gap-1">
               <span>Precio Tienda: ${product.price_store.toFixed(2)}</span>

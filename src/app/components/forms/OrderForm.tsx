@@ -12,7 +12,7 @@ import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
 import ProductForm from "./ProductForm";
 import { Sidebar } from "primereact/sidebar";
-import "./OrderForm.css";
+import "./style/OrderForm.css";
 
 
 const OrderForm: React.FC = () => {

@@ -21,6 +21,7 @@ import Stores from "./app/pages/Stores";
 import ShopForm from "./app/components/forms/ShopForm";
 import PackageForm from "./app/components/forms/PackageForm";
 import DeliveryForm from "./app/components/forms/DeliveryForm";
+import { AppRoutes } from "./app/routes/Routes";
 
 function App() {
   const pageNav = useNavigate();
@@ -41,7 +42,7 @@ function App() {
       command: () => {
         pageNav("/orders");
       },
-      className: location.pathname === "/orders" ? "active-menu-item" : "",
+      className: location.pathname.includes("/orders") ? "active-menu-item" : "",
     },
     {
       label: "Productos",
@@ -49,7 +50,7 @@ function App() {
       command: () => {
         pageNav("/products");
       },
-      className: location.pathname === "/products" ? "active-menu-item" : "",
+      className: location.pathname.includes("/products") ? "active-menu-item" : "",
     },
     {
       label: "Compras",
@@ -57,7 +58,7 @@ function App() {
       command: () => {
         pageNav("/shops");
       },
-      className: location.pathname === "/shops" ? "active-menu-item" : "",
+      className: location.pathname.includes("/shops") ? "active-menu-item" : "",
     },
     {
       label: "Paquetes",
@@ -65,7 +66,7 @@ function App() {
       command: () => {
         pageNav("/packages");
       },
-      className: location.pathname === "/packages" ? "active-menu-item" : "",
+      className: location.pathname.includes("/packages") ? "active-menu-item" : "",
     },
     {
       label: "Entrega",
@@ -73,7 +74,7 @@ function App() {
       command: () => {
         pageNav("/delivery");
       },
-      className: location.pathname === "/delivery" ? "active-menu-item" : "",
+      className: location.pathname.includes("/delivery") ? "active-menu-item" : "",
     },
     {
       label: "Estadísticas",
@@ -81,7 +82,7 @@ function App() {
       command: () => {
         pageNav("/data");
       },
-      className: location.pathname === "/data" ? "active-menu-item" : "",
+      className: location.pathname.includes("/data") ? "active-menu-item" : "",
     },
     {
       label: "Tiendas",
@@ -89,7 +90,7 @@ function App() {
       command: () => {
         pageNav("/stores");
       },
-      className: location.pathname === "/stores" ? "active-menu-item" : "",
+      className: location.pathname.includes("/stores") ? "active-menu-item" : "",
     },
     {
       label: "Utiles",
@@ -97,7 +98,7 @@ function App() {
       command: () => {
         pageNav("/tools");
       },
-      className: location.pathname === "/tools" ? "active-menu-item" : "",
+      className: location.pathname.includes("/tools") ? "active-menu-item" : "",
     },
     {
       label: "Usuarios",
@@ -105,7 +106,7 @@ function App() {
       command: () => {
         pageNav("/users");
       },
-      className: location.pathname === "/users" ? "active-menu-item" : "",
+      className: location.pathname.includes("/users") ? "active-menu-item" : "",
     },
   ];
 
@@ -132,33 +133,7 @@ function App() {
           <Menu model={items} />
         </aside>
         <div className="section-content w-full flex flex-col max-w-[85%] justify-star items-star border-t-2 border-gray-200 border-b-2 gap-10">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/api" element={<Api />} />
-            <Route path="/products" element={<Products />} />
-
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/new" element={<OrderForm />} />
-
-            <Route path="/shops" element={<Shops />} />
-            <Route path="/shops/new" element={<ShopForm />} />
-
-            <Route path="/users" element={<Users />} />
-
-            <Route path="/packages" element={<Packages />} />
-            <Route path="/packages/new" element={<PackageForm />} />
-            
-            <Route path="/data" element={<Stadist />} />
-            
-            <Route path="/delivery" element={<Delivery />} /> 
-            <Route path="/delivery/new" element={<DeliveryForm />} /> 
-            
-            <Route path="/tools" element={<Tools />} />
-            <Route path="/stores" element={<Stores />} />
-
-            <Route path="/login" element={<Home />} />
-            <Route path="/register" element={<Home />} />
-          </Routes>
+          <AppRoutes/>
         </div>
       </section>
       <footer className="w-screen text-sm font-bold px-1.5 flex justify-center p-3 ">

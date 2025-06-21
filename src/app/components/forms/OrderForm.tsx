@@ -1,4 +1,6 @@
-import React, {  useRef, useState } from "react";
+import "./style/OrderForm.css";
+import React, { useRef, useState } from "react";
+
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -6,13 +8,15 @@ import { FloatLabel } from "primereact/floatlabel";
 import { Avatar } from "primereact/avatar";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { ToggleButton, ToggleButtonChangeEvent } from "primereact/togglebutton";
-import StoreLogo from "../StoreLogo";
+import { Sidebar } from "primereact/sidebar";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
+
+import StoreLogo from "../StoreLogo";
 import ProductForm from "./ProductForm";
-import { Sidebar } from "primereact/sidebar";
-import "./style/OrderForm.css";
+import { orderStates } from "../../utils/options/order";
+
 
 
 const OrderForm: React.FC = () => {
@@ -51,24 +55,6 @@ const OrderForm: React.FC = () => {
   const [clientOrder, setClientOrder] = useState<user | null>();
   const [order, setOrder] = useState<order>({ products: [] });
   const [visible, setVisible] = useState<boolean>(false);
-
-  const stateValues: orderState[] = [
-    {
-      name: "Creado",
-    },
-    {
-      name: "Pagado",
-    },
-    {
-      name: "Comprado",
-    },
-    {
-      name: "Recibido",
-    },
-    {
-      name: "Entregado",
-    },
-  ];
 
   const clientsOption = (item: user) => {
     return (
@@ -156,7 +142,7 @@ const OrderForm: React.FC = () => {
 
   const updateCost = () => {
     let total = 0;
-    order.products.map((product)=>{total+=product.price})
+    order.products.map((product) => { total += product.price })
     setOrder({ ...order, totalCost: total });
     setVisible(false);
   };
@@ -174,7 +160,7 @@ const OrderForm: React.FC = () => {
       <div className="w-full flex flex-row justify-start items-center gap-2 flex-grow ">
         <form
           className="min-h-[100%] flex flex-col gap-2 justify-between items-center min-w-[250px]"
-          onSubmit={() => {}}
+          onSubmit={() => { }}
         >
           <div className="flex flex-col gap-5 justify-start items-center w-full">
             <FloatLabel className="w-full">
@@ -196,9 +182,9 @@ const OrderForm: React.FC = () => {
               <Dropdown
                 inputId="status"
                 value={order?.state}
-                onChange={(e: DropdownChangeEvent) => setOrder({...order, state: e.target.value})}
-                options={stateValues}
-                optionLabel="name"
+                onChange={(e: DropdownChangeEvent) => setOrder({ ...order, state: e.target.value })}
+                options={orderStates}
+                optionLabel="label"
                 className="w-full"
                 showClear
                 placeholder="Selecciona el estado"
@@ -212,7 +198,7 @@ const OrderForm: React.FC = () => {
                 offIcon="pi pi-ban"
                 onLabel=""
                 offLabel=""
-                tooltip={order.pay_status?"Pagado":"No Pagado"}
+                tooltip={order.pay_status ? "Pagado" : "No Pagado"}
                 checked={order?.pay_status}
                 onChange={(e: ToggleButtonChangeEvent) =>
                   setOrder({ ...order, pay_status: e.value })
@@ -261,7 +247,7 @@ const OrderForm: React.FC = () => {
             <span className="font-medium text-sm">
               Monto Total:{" "}
               <strong className="font-test min-w-[50px]">
-                {"$ "+((order.products.length==0|| order.products)?"0.00":(order?.totalCost?.toFixed(2)))}
+                {"$ " + ((order.products.length == 0 || order.products) ? "0.00" : (order?.totalCost?.toFixed(2)))}
               </strong>
             </span>
           </div>

@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router";
 import Home from "../pages/Home";
 import Api from "../pages/Api";
-import { Users } from "lucide-react";
 import DeliveryForm from "../components/forms/DeliveryForm";
 import OrderForm from "../components/forms/OrderForm";
 import PackageForm from "../components/forms/PackageForm";
@@ -11,9 +10,9 @@ import Orders from "../pages/Orders";
 import Packages from "../pages/Packages";
 import Products from "../pages/Products";
 import Shops from "../pages/Shops";
-import Stadist from "../pages/Stadist";
 import Stores from "../pages/Stores";
 import Tools from "../pages/Tools";
+import Users from "../pages/Users";
 
 export const AppRoutes = () => {
     return (
@@ -33,7 +32,6 @@ export const AppRoutes = () => {
             <Route path="/packages" element={<Packages />} />
             <Route path="/packages/new" element={<PackageForm />} />
 
-            <Route path="/data" element={<Stadist />} />
 
             <Route path="/delivery" element={<Delivery />} />
             <Route path="/delivery/new" element={<DeliveryForm />} />

@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Avatar } from "primereact/avatar";
 import { ToggleButton, ToggleButtonChangeEvent } from "primereact/togglebutton";
 import { Button } from "primereact/button";
-import "./Products.css";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useRef } from "react";
 import StoreForm from "../components/forms/StoreForm";

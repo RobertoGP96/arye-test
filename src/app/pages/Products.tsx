@@ -6,7 +6,6 @@ import { IconField } from "primereact/iconfield";
 import { useEffect, useState } from "react";
 import { Avatar } from "primereact/avatar";
 
-import "./Products.css";
 import StoreLogo from "../components/StoreLogo";
 import { Button } from "primereact/button";
 
